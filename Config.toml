@@ -1,0 +1,9 @@
+port = 5001
+url = "https://ws.audioscrobbler.com/2.0"
+apikey = "4e0f1e09df74b64accc9a69008569e65"
+# rmqhost = "snake-01.rmq2.cloudamqp.com"
+# rmqport = 5671
+rexch = "lastfm"
+rkey = "lastfm.bio"
+#rcfg = { username="shgzthmj", password="6aOT7qs3WbaJJsp0rqZqAACt8K1ah8ba" }
+#rprops = { "type"="direct", headers={ queuedBy="bal-lastfmbio", user="hayden" }, Content-Type="application/xml" }

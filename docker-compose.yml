@@ -1,0 +1,8 @@
+version: '3'
+services:
+  lastfmbio:  
+    image: ghcr.io/hayden-marsh-iw/lastfmbio:latest
+    ports:
+      - 9091:5001
+    volumes:
+      - c:/temp/lastfmbio:/home/ballerina/lastfmbio/resources/profiles:rw

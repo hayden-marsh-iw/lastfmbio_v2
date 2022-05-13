@@ -1,0 +1,5 @@
+[project]
+org-name = "haydenmarsh"
+name = "lastfmbio"
+version = "1.0.0"
+authors = ["Hayden Marsh"]
