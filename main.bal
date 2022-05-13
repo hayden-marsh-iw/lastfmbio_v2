@@ -15,6 +15,9 @@ configurable string apikey = ?;
 //configurable rmq:BasicProperties rprops = ?;
 //configurable string rmqhost = ?;
 //configurable int rmqport = ?;
+
+
+
 configurable string rexch = ?;
 configurable string rkey = ?;
 
