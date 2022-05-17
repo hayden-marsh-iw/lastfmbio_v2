@@ -4,33 +4,33 @@ import ballerina/lang.value as v;
 import ballerina/log;
 import ballerina/xmldata;
 import ballerina/xslt;
-import ballerinax/rabbitmq as rmq;
+// import ballerinax/rabbitmq as rmq;
 import lastfmbio.functions as f;
+// import lastfmbio.initVars as iv;
 import lastfmbio.types as t;
 
+// last fm api
 configurable int port = ?;
 configurable string url = ?;
 configurable string apikey = ?;
-//configurable rmq:ConnectionConfiguration rcfg = ?;
-//configurable rmq:BasicProperties rprops = ?;
-//configurable string rmqhost = ?;
-//configurable int rmqport = ?;
 
-
-
-configurable string rexch = ?;
-configurable string rkey = ?;
-
-
+// // rmq
+// public configurable int rmqport = ?;
+// public configurable string rmqhost = ?;
+// public configurable string rexch = ?;
+// public configurable string rkey = ?;
+// public configurable string rmquser = ?;
+// public configurable string rmqpass = ?;
 
 service /api/v1/queueBio on new http:Listener(port) {
     isolated resource function get artist(string name) returns string?|error? { 
-        log:printInfo("Request on port " + port.toString() + ": for artist: " + name);
-
-        rmq:ConnectionConfiguration rcfg = {username:"shgzthmj", password:"6aOT7qs3WbaJJsp0rqZqAACt8K1ah8ba" };
-        string rmqhost = "amqp://snake.rmq.cloudamqp.com/shgzthmj";
-        int rmqport = 5672;
-        rmq:Client r = check new(rmqhost, rmqport, rcfg);
+        // rmq:Client r = check new(rmqhost, rmqport, {
+        //         username: rmquser,
+        //         password: rmqpass
+        //     });
+        // check r -> exchangeDeclare(rexch, rmq:DIRECT_EXCHANGE);
+        // check r -> queueDeclare(rkey, { durable:true });
+        // check r -> queueBind(rkey, rexch, rkey);
 
         http:Client cl = check new(url);
         json prfl = check cl -> get("/?method=artist.getinfo&artist=" + name + "&api_key=" + apikey + "&format=json");
@@ -48,11 +48,11 @@ service /api/v1/queueBio on new http:Listener(port) {
                     bio: check v:ensureType(prfl.artist.bio.content, string)
                     };
                 xml x = check xslt:transform(check v:ensureType(xmldata:fromJson(check b.cloneWithType(json))), check io:fileReadXml("resources/reformat.xslt"));
-                check r -> publishMessage({ content: x.toString().toBytes(), routingKey: rkey }); //, properties: rprops
-                return "Queued: " + rexch + ":" + rkey + "\r\nSaved to disk: " + check f:saveProfile(x, name) + "\r\n\r\n" + x.toString();
+                // check r -> publishMessage({ content: x.toString().toBytes(), routingKey: rkey });
+                return "\r\nSaved to disk: " + check f:saveProfile(x, name) + "\r\n\r\n" + x.toString();
+                //"Queued: " + rexch + ":" + rkey + 
                 } else { 
-                    xml x = check v:ensureType(xmldata:fromJson(prfl));
-                    log:printWarn(x.toString());     
+                    xml x = check v:ensureType(xmldata:fromJson(prfl));     
                     return x.toString();   
                 }
         } on fail var e { 

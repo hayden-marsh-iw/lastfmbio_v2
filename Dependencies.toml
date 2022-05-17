@@ -305,6 +305,7 @@ dependencies = [
 modules = [
 	{org = "haydenmarsh", packageName = "lastfmbio", moduleName = "lastfmbio"},
 	{org = "haydenmarsh", packageName = "lastfmbio", moduleName = "lastfmbio.functions"},
+	{org = "haydenmarsh", packageName = "lastfmbio", moduleName = "lastfmbio.initVars"},
 	{org = "haydenmarsh", packageName = "lastfmbio", moduleName = "lastfmbio.types"}
 ]
 

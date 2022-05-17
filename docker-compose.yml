@@ -1,8 +1,23 @@
 version: '3'
 services:
+  rmq:
+    image: rabbitmq:management
+    container_name: rmq
+    ports: 
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_HOST_NAME=rmq
+      - RABBITMQ_NODE_PORT=5672
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=pass
   lastfmbio:  
     image: ghcr.io/hayden-marsh-iw/lastfmbio:latest
+    #build: .
+    container_name: app
     ports:
-      - 9091:5001
+      - 9091:9091
     volumes:
       - c:/temp/lastfmbio:/home/ballerina/lastfmbio/resources/profiles:rw
+    depends_on:
+      - rmq

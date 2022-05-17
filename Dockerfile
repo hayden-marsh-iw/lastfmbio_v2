@@ -1,5 +1,5 @@
 FROM ballerina/ballerina:nightly
-EXPOSE 5001
+EXPOSE 9091
 USER root
 COPY ./modules /home/ballerina/lastfmbio/modules
 COPY ./resources /home/ballerina/lastfmbio/resources

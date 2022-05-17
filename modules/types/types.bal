@@ -12,3 +12,16 @@ public type bioRecord record {|
     sim[] similar;
     string bio;
 |};
+
+// public type cfg record {|
+//     int lastfm_port;
+//     string lastfm_url;
+//     string lastfm_apikey;
+
+//     int? rmq_port;
+//     string? rmq_host;
+//     string? rmq_exch;
+//     string? rmq_routingkey;
+//     string? rmq_user;
+//     string? rmq_password;
+// |};
